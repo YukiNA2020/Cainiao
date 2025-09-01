@@ -25,18 +25,6 @@
 - **商品数量** (item_qty): 订单中包含的商品数量
 - **物流类型** (if_cainiao): 是否使用菜鸟物流（1=是，0=否）
 
-###  分析方法
-
-#### 数据预处理
-```r
-# 清除未评分订单和缺失值
-order_data_clean <- order_data %>%
-  filter(review != 'NoReview') %>%
-  na.omit()
-
-# 异常值处理（99.5%百分位数）
-quantiles <- quantile(order_data_clean$pay_amount, probs = c(0.005, 0.995))
-
 ###  程序架构
 
 ├── data/
@@ -49,3 +37,17 @@ quantiles <- quantile(order_data_clean$pay_amount, probs = c(0.005, 0.995))
 │   └── results/                      # 分析结果
 ├── README.md                         # 项目说明
 └── Research_Report.pdf               # 完整研究报告
+
+
+###  分析方法
+
+#### 数据预处理
+```r
+# 清除未评分订单和缺失值
+order_data_clean <- order_data %>%
+  filter(review != 'NoReview') %>%
+  na.omit()
+
+# 异常值处理（99.5%百分位数）
+quantiles <- quantile(order_data_clean$pay_amount, probs = c(0.005, 0.995))
+
